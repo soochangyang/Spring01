@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+# libs 폴더 안의 모든 jar 파일을 Git에 강제로 포함시킨다!
+!libs/
+!libs/**/*.jar
