@@ -6,7 +6,10 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
     // OCP, DIP 객체지양 설계 원칙 준수 연습
     //private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -19,6 +22,7 @@ public class OrderServiceImpl implements OrderService {
 
     // 구성영역(Config) Constructor 로 생성시에 추상화 변수에 구체회된 변수를 생성
     // 하여 구현부에서는 의존성에 대하여 고려 하지 않도록 한다.
+    @Autowired  // @Autowired를 사용하면 생성자에서 여러 의존관계도 한번에 주입받을 수 있다.
     public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository) {
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;

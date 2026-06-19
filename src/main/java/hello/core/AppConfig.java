@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 //IOC(Inversion of Control) / DI(Dependency Injection) Container
-@Configuration
+@Configuration   // @Configuration을 설정하지 않으면 싱글톤이 깨짐
 public class AppConfig {
 
     // MemoryMemberRepository 가 내부적으로 두번 호출되면 Singleton 이 유지 되는가? 실험
