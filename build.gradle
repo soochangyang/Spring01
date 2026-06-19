@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'hello'
+group = 'core' // 프로젝트 이름 (core 또는 hello)
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -13,10 +13,12 @@ java {
 	}
 }
 
+// 인터넷에서 라이브러리를 다운로드 받으라는 명령어
 repositories {
 	mavenCentral()
 }
 
+// 내 프로젝트가 사용할 라이브러리 목록
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -27,7 +29,14 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// ============================================================================
+// 📦 [가장 중요] 회사(폐쇄망)로 가져갈 부품 포장 기능
+// ============================================================================
 task copyDependencies(type: Copy) {
+	// 1. 앱 실행에 필요한 핵심 부품 포장
 	from configurations.runtimeClasspath
+	// 2. 테스트(JUnit, AssertJ 등)에 필요한 부품까지 완벽하게 포장!
+	from configurations.testRuntimeClasspath
+	// 3. 이 모든 걸 'libs' 폴더에 담기
 	into 'libs'
 }
