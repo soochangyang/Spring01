@@ -1,7 +1,6 @@
 package hello.core;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
@@ -17,19 +16,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
+    // MemoryMemberRepository 가 내부적으로 두번 호출되면 Singleton 이 유지 되는가? 실험
+    // @Bean memberService -> new MemoryMemberRepository()
+    // @Bean orderService -> new MemoryMemberRepository()
+    //
+
     @Bean
     public MemberService memberService(){
         //생성자 주입
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        System.out.println("call AppConfig.memberService");
+        return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository(){
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService(){
+        System.out.println("call AppConfig.orderService");
         // 생성자 주입
         return new OrderServiceImpl(discountPolicy(), memberRepository());
     }

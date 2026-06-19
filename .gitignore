@@ -38,3 +38,7 @@ out/
 # libs 폴더 안의 모든 jar 파일을 Git에 강제로 포함시킨다!
 !libs/
 !libs/**/*.jar
+# 오프라인 모드 스위치 파일은 Git에 올리지 않음
+offline.flag
+# build.gradle 파일 올리지 않음
+build.gradle
